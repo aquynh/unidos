@@ -1,0 +1,5 @@
+unidos
+*.o
+
+.*.swp
+.DS_Store
