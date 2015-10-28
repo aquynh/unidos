@@ -11,7 +11,7 @@ Compilation
 
 [Unicorn](http://www.unicorn-engine.org) must be installed before going to the next step.
 
-On Mac OSX/Linux/BSD, simply run `make` to compile `unidos`.
+On Mac OSX/Linux/BSD, simply run *make* to compile **unidos**.
 
     $ make
 
@@ -19,13 +19,13 @@ On Mac OSX/Linux/BSD, simply run `make` to compile `unidos`.
 Usage
 -------
 
-Simply pass the DOS file and options to `unidos`. Below is an example on how to run a sample tool `pkunzjr.com` with our emulator.
+Simply pass the DOS file and options to *unidos*. Below is an example on how to run a sample tool *pkunzjr.com* with our emulator.
 
-To run `pkunzjr.com`, do:
+To run *pkunzjr.com*, do:
 
     $ ./unidos bin/pkunzjr.com
 
-To unzip sample file `a.zip`, do:
+To unzip sample file *a.zip*, do:
 
     $ ./unidos bin/pkunzjr.com -o a.zip
 
@@ -45,4 +45,4 @@ This tool is released under the [GPL license](COPYING).
 Author
 -------
 
-Nguyen Anh Quynh <aquynh at gmail dot com>
+Nguyen Anh Quynh (aquynh at gmail dot com)
