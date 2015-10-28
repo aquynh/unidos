@@ -13,7 +13,7 @@ OBJECTS  := $(SOURCES:.c=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	@$(CC) $(LDFLAGS) $(OBJECTS) -o $(TARGET)
+	@$(CC) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
 	@echo "  LINKED" $@
 
 %.o: %.c
