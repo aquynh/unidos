@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <sys/errno.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "int21.h"
 
@@ -138,6 +139,45 @@ void int21(uc_engine *uc)
             //printf("\n>>> 0x%x: interrupt: %x, AH = %02x\n", r_ip, 0x21, r_ah);
             break;
 
+        case 0x00: //terminate process
+            {
+                uc_emu_stop(uc);
+            }
+
+        case 0x01: // character input with echo
+            {
+                uint8_t r_al;
+
+                r_al = getchar();
+
+                uc_reg_write(uc, UC_X86_REG_AL, &r_al);
+
+                break;
+            }
+
+        case 0x02: // character output
+            {
+                uint8_t r_dl;
+
+                uc_reg_read(uc, UC_X86_REG_DL, &r_dl);
+
+                printf("%c\n", r_dl);
+
+                break;
+            }
+
+        case 0x08: // character input without echo
+            {
+                // TODO we need a cross-platform function that input without echo
+                uint8_t r_al;
+
+                r_al = getchar(); // FIXME
+
+                uc_reg_write(uc, UC_X86_REG_AL, &r_al);
+
+                break;
+            }
+
         case 0x09: // write to screen
             {
                 uint16_t r_dx, r_ds;
@@ -151,6 +191,29 @@ void int21(uc_engine *uc)
                 // read until '$'
                 buf = read_str_till_char(uc, MK_FP(r_ds, r_dx), '$');
                 printf("%s", buf);
+
+                break;
+            }
+
+        case 0x0a: // buffered keyboard input
+            {
+                uint16_t r_dx, r_ds;
+                uint8_t max_buf = 0;
+                char *buf = NULL;
+                char *str = NULL;   
+
+                uc_reg_read(uc, UC_X86_REG_DX, &r_dx);
+                uc_reg_read(uc, UC_X86_REG_DS, &r_ds);
+                uc_mem_read(uc, r_dx, &max_buf, 1);
+
+                fscanf(stdin, "%ms", &buf);
+                str = strndup(buf, max_buf -1);
+                str[max_buf] = '$';
+
+                uc_mem_write(uc, MK_FP(r_ds, r_dx) + 2, str, strlen(str));
+
+                free(buf);
+                free(str);
 
                 break;
             }
