@@ -144,17 +144,6 @@ void int21(uc_engine *uc)
                 uc_emu_stop(uc);
             }
 
-        case 0x01: // character input with echo
-            {
-                uint8_t r_al;
-
-                r_al = getchar();
-
-                uc_reg_write(uc, UC_X86_REG_AL, &r_al);
-
-                break;
-            }
-
         case 0x02: // character output
             {
                 uint8_t r_dl;
@@ -162,18 +151,6 @@ void int21(uc_engine *uc)
                 uc_reg_read(uc, UC_X86_REG_DL, &r_dl);
 
                 printf("%c\n", r_dl);
-
-                break;
-            }
-
-        case 0x08: // character input without echo
-            {
-                // TODO we need a cross-platform function that input without echo
-                uint8_t r_al;
-
-                r_al = getchar(); // FIXME
-
-                uc_reg_write(uc, UC_X86_REG_AL, &r_al);
 
                 break;
             }
