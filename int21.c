@@ -150,7 +150,7 @@ void int21(uc_engine *uc)
 
                 uc_reg_read(uc, UC_X86_REG_DL, &r_dl);
 
-                printf("%c\n", r_dl);
+                printf("%c", r_dl);
 
                 break;
             }
