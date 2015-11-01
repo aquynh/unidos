@@ -175,13 +175,12 @@ void int21(uc_engine *uc)
         case 0x0a: // buffered keyboard input
             {
                 uint16_t r_dx, r_ds;
-                uint8_t max_buf = 0;
-                char *buf = NULL;
-                char *str = NULL;   
+                uint8_t max_buf;
+                char *buf, *str;   
 
                 uc_reg_read(uc, UC_X86_REG_DX, &r_dx);
                 uc_reg_read(uc, UC_X86_REG_DS, &r_ds);
-                uc_mem_read(uc, r_dx, &max_buf, 1);
+                uc_mem_read(uc, MK_FP(r_ds, r_dx), &max_buf, 1);
 
                 fscanf(stdin, "%ms", &buf);
                 str = strndup(buf, max_buf -1);
