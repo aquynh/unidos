@@ -54,7 +54,7 @@ static void usage(char *prog)
 static void setup_psp(int16_t seg, uint8_t *fcontent, int argc, char **argv)
 {
     uint32_t abs = MK_FP(seg, 0);
-    int j;
+    int i, j;
     uint8_t c = 0;
     struct PSP *PSP = (struct PSP *)(fcontent + abs);
 
@@ -71,7 +71,7 @@ static void setup_psp(int16_t seg, uint8_t *fcontent, int argc, char **argv)
     PSP->FCB1[0] = 0x01;
     PSP->FCB1[1] = 0x20;
 
-    for (int i = 2; i < argc && c < 0x7E; i++) {
+    for (i = 2; i < argc && c < 0x7E; i++) {
         j = 0;
         PSP->CommandLine[c++] = ' ';
         while (argv[i][j] && c < 0x7E)
