@@ -3,7 +3,7 @@ UniDOS
 
 UniDOS is an emulator to run Microsoft DOS executables.
 
-Built on top of [Unicorn engine](http://www.unicorn-engine.org), so UniDOS should be able to work wherever Unicorn works.
+Built on top of [Unicorn engine](http://www.unicorn-engine.org), UniDOS should be able to work wherever Unicorn works.
 
 
 Compilation
