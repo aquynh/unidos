@@ -166,7 +166,7 @@ int main(int argc, char **argv)
     uc_mem_write (uc, 0, fcontent, DOS_ADDR + fsize);
 
     // handle interrupt ourself
-    uc_hook_add(uc, &trace, UC_HOOK_INTR, hook_intr, NULL);
+    uc_hook_add(uc, &trace, UC_HOOK_INTR, hook_intr, NULL, 1, 0);
 
     err = uc_emu_start(uc, DOS_ADDR, DOS_ADDR + 0x10000, 0, 0);
     if (err) {
